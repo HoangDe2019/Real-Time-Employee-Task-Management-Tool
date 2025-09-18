@@ -3,24 +3,27 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
+  "homepage": "https://hoangde2019.github.io/Real-Time-Employee-Task-Management-Tool/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
-    "axios": "^1.7.7",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@mui/icons-material": "^6.1.6",
     "@mui/material": "^6.1.6",
+    "axios": "^1.7.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "socket.io-client": "^4.8.1"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.4",
+    "gh-pages": "^6.3.0",
     "vite": "^5.4.2"
   }
 }
-

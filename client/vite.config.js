@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react';
 
 // Vite configuration to proxy API and Socket.IO to backend
 export default defineConfig({
+  base: '/Real-Time-Employee-Task-Management-Tool/',
   plugins: [
     react()
   ],
