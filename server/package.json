@@ -1,0 +1,21 @@
+{
+  "name": "rt-employee-task-manager-server",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch src/index.js",
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "firebase": "^12.2.1",
+    "firebase-admin": "^12.6.0",
+    "http": "^0.0.1-security",
+    "nodemailer": "^6.9.14",
+    "socket.io": "^4.8.1",
+    "uuid": "^9.0.1"
+  }
+}
