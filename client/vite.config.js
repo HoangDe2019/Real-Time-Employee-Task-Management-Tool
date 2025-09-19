@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 
 // Vite configuration to proxy API and Socket.IO to backend
 export default defineConfig({
-  base: '/Real-Time-Employee-Task-Management-Tool/',
+  base: '/',
   plugins: [
     react()
   ],
@@ -12,16 +12,16 @@ export default defineConfig({
     strictPort: true,
     proxy: {
       '/api': {
-        target: 'http://localhost:4000',
+        target: 'http://localhost:8888',
         changeOrigin: true,
         secure: false
       },
-      '/socket.io': {
-        target: 'http://localhost:4000',
-        ws: true,
-        changeOrigin: true,
-        secure: false
-      }
+      // '/socket.io': {
+      //   target: 'http://localhost:4000',
+      //   ws: true,
+      //   changeOrigin: true,
+      //   secure: false
+      // }
     }
   },
   build: {
