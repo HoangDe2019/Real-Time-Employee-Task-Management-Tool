@@ -78,7 +78,7 @@ A full-stack application with React frontend and Express backend for managing em
 
 5. **Access the Application**
    - Frontend: http://localhost:5173
-   - Backend API: http://localhost:4000
+   - Backend API: http://113.173.154.153:4000
 
 ## Deployment
 

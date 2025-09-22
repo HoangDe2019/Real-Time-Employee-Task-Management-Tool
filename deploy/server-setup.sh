@@ -5,41 +5,41 @@
 
 set -e
 
-echo "Ì∫Ä Setting up server 113.173.154.153 for Real-Time Employee Task Management Tool..."
+echo "ÔøΩÔøΩÔøΩ Setting up server 113.173.154.153 for Real-Time Employee Task Management Tool..."
 
 # Update system
-echo "Ì≥¶ Updating system packages..."
+echo "ÔøΩÔøΩÔøΩ Updating system packages..."
 sudo apt update && sudo apt upgrade -y
 
 # Install Node.js 18
-echo "Ì≥¶ Installing Node.js 18..."
+echo "ÔøΩÔøΩÔøΩ Installing Node.js 18..."
 curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
 sudo apt-get install -y nodejs
 
 # Install PM2 globally
-echo "Ì≥¶ Installing PM2 process manager..."
+echo "ÔøΩÔøΩÔøΩ Installing PM2 process manager..."
 sudo npm install -g pm2
 
 # Install Nginx
-echo "Ì≥¶ Installing Nginx..."
+echo "ÔøΩÔøΩÔøΩ Installing Nginx..."
 sudo apt install -y nginx
 
 # Install Git
-echo "Ì≥¶ Installing Git..."
+echo "ÔøΩÔøΩÔøΩ Installing Git..."
 sudo apt install -y git
 
 # Create application directory
-echo "Ì≥Å Creating application directory..."
+echo "ÔøΩÔøΩÔøΩ Creating application directory..."
 sudo mkdir -p /var/www/rt-employee-task-manager
 sudo chown -R $USER:$USER /var/www/rt-employee-task-manager
 
 # Clone the repository
-echo "Ì≥• Cloning repository..."
+echo "ÔøΩÔøΩÔøΩ Cloning repository..."
 cd /var/www/rt-employee-task-manager
 git clone https://github.com/hoangde2019/Real-Time-Employee-Task-Management-Tool.git .
 
 # Install server dependencies
-echo "Ì≥¶ Installing server dependencies..."
+echo "ÔøΩÔøΩÔøΩ Installing server dependencies..."
 cd server
 npm install
 
@@ -104,7 +104,7 @@ server {
 
     # API routes
     location /api/ {
-        proxy_pass http://localhost:4000;
+        proxy_pass http://113.173.154.153:4000;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection 'upgrade';
@@ -117,7 +117,7 @@ server {
 
     # Socket.IO
     location /socket.io/ {
-        proxy_pass http://localhost:4000;
+        proxy_pass http://113.173.154.153:4000;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "upgrade";
@@ -129,7 +129,7 @@ server {
 
     # Health check endpoint
     location /health {
-        proxy_pass http://localhost:4000;
+        proxy_pass http://lo113.173.154.153calhost:4000;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -139,16 +139,16 @@ server {
 NGINXEOF
 
 # Enable the site
-echo "Ì¥ó Enabling Nginx site..."
+echo "ÔøΩÔøΩÔøΩ Enabling Nginx site..."
 sudo ln -sf /etc/nginx/sites-available/rt-employee-task-manager /etc/nginx/sites-enabled/
 sudo rm -f /etc/nginx/sites-enabled/default
 
 # Test Nginx configuration
-echo "Ì∑™ Testing Nginx configuration..."
+echo "ÔøΩÔøΩÔøΩ Testing Nginx configuration..."
 sudo nginx -t
 
 # Start and enable services
-echo "Ì¥Ñ Starting services..."
+echo "ÔøΩÔøΩÔøΩ Starting services..."
 sudo systemctl start nginx
 sudo systemctl enable nginx
 
@@ -157,16 +157,16 @@ sudo mkdir -p /var/log/pm2
 sudo chown -R $USER:$USER /var/log/pm2
 
 # Start the application with PM2
-echo "Ì∫Ä Starting application with PM2..."
+echo "ÔøΩÔøΩÔøΩ Starting application with PM2..."
 pm2 start ecosystem.config.js
 
 # Save PM2 configuration
-echo "Ì≤æ Saving PM2 configuration..."
+echo "ÔøΩÔøΩÔøΩ Saving PM2 configuration..."
 pm2 save
 pm2 startup
 
 # Open firewall ports
-echo "Ì¥• Configuring firewall..."
+echo "ÔøΩÔøΩÔøΩ Configuring firewall..."
 sudo ufw allow 22
 sudo ufw allow 80
 sudo ufw allow 4000
@@ -174,17 +174,17 @@ sudo ufw --force enable
 
 echo "‚úÖ Server setup completed!"
 echo ""
-echo "Ìºê Your API server is now running at:"
+echo "ÔøΩÔøΩÔøΩ Your API server is now running at:"
 echo "   http://113.173.154.153:4000"
 echo ""
-echo "Ì≥ã Next steps:"
+echo "ÔøΩÔøΩÔøΩ Next steps:"
 echo "1. Update Firebase configuration in /var/www/rt-employee-task-manager/server/.env"
 echo "2. Update email configuration in /var/www/rt-employee-task-manager/server/.env"
 echo "3. Test the API: curl http://113.173.154.153:4000/health"
 echo "4. Check PM2 status: pm2 status"
 echo "5. View logs: pm2 logs rt-employee-task-manager"
 echo ""
-echo "Ì¥ß Useful commands:"
+echo "ÔøΩÔøΩÔøΩ Useful commands:"
 echo "   pm2 restart rt-employee-task-manager  # Restart app"
 echo "   pm2 stop rt-employee-task-manager     # Stop app"
 echo "   pm2 logs rt-employee-task-manager     # View logs"
