@@ -104,7 +104,7 @@ server {
 
     # API routes
     location /api/ {
-        proxy_pass http://113.173.154.153:4000;
+        proxy_pass http://113.173.154.153:8888;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection 'upgrade';
@@ -117,7 +117,7 @@ server {
 
     # Socket.IO
     location /socket.io/ {
-        proxy_pass http://113.173.154.153:4000;
+        proxy_pass http://113.173.154.153:8888;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "upgrade";
@@ -175,12 +175,12 @@ sudo ufw --force enable
 echo "✅ Server setup completed!"
 echo ""
 echo "��� Your API server is now running at:"
-echo "   http://113.173.154.153:4000"
+echo "   http://113.173.154.153:8888"
 echo ""
 echo "��� Next steps:"
 echo "1. Update Firebase configuration in /var/www/rt-employee-task-manager/server/.env"
 echo "2. Update email configuration in /var/www/rt-employee-task-manager/server/.env"
-echo "3. Test the API: curl http://113.173.154.153:4000/health"
+echo "3. Test the API: curl http://113.173.154.153:8888/health"
 echo "4. Check PM2 status: pm2 status"
 echo "5. View logs: pm2 logs rt-employee-task-manager"
 echo ""

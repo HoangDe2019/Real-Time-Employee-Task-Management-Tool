@@ -12,12 +12,12 @@ export default defineConfig({
     strictPort: true,
     proxy: {
       '/api': {
-        target: 'http://113.173.154.153:4000',
+        target: 'http://113.173.154.153:8888',
         changeOrigin: true,
         secure: false
       },
       '/socket.io': {
-        target: 'http://113.173.154.153:4000',
+        target: 'http://113.173.154.153:8888',
         ws: true,
         changeOrigin: true,
         secure: false
