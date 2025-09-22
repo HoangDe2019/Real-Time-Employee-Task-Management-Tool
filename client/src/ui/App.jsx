@@ -19,7 +19,9 @@ export default function App() {
 
   const socket = useMemo(() => {
     console.log('[App] initializing socket');
-    return io('/', { path: '/socket.io' });
+    // Use environment variable for socket URL, fallback to current origin for development
+    const socketURL = import.meta.env.VITE_SOCKET_URL || window.location.origin;
+    return io(socketURL, { path: '/socket.io' });
   }, []);
 
   useEffect(() => {
@@ -62,5 +64,3 @@ export default function App() {
     </div>
   );
 }
-
-

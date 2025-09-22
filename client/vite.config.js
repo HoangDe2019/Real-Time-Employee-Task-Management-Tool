@@ -1,9 +1,9 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-// Vite configuration to proxy API and Socket.IO to backend
+// Vite configuration for GtHub Pages deployment
 export default defineConfig({
-  base: '/',
+  base: '/Real-Time-Employee-Task-Management-Tool/',
   plugins: [
     react()
   ],
@@ -12,21 +12,31 @@ export default defineConfig({
     strictPort: true,
     proxy: {
       '/api': {
-        target: 'http://localhost:8888',
+        target: 'http://localhost:4000',
         changeOrigin: true,
         secure: false
       },
-      // '/socket.io': {
-      //   target: 'http://localhost:4000',
-      //   ws: true,
-      //   changeOrigin: true,
-      //   secure: false
-      // }
+      '/socket.io': {
+        target: 'http://localhost:4000',
+        ws: true,
+        changeOrigin: true,
+        secure: false
+      }
     }
   },
   build: {
-    sourcemap: true
+    sourcemap: true,
+    outDir: 'dist',
+    assetsDir: 'assets',
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          mui: ['@mui/material', '@mui/icons-material', '@emotion/react', '@emotion/styled'],
+          socket: ['socket.io-client'],
+          http: ['axios']
+        }
+      }
+    }
   }
 });
-
-

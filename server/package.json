@@ -3,12 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "homepage": "https://hoangde2019.github.io/Real-Time-Employee-Task-Management-Tool/",
   "scripts": {
     "dev": "node --watch src/index.js",
     "start": "node src/index.js",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "test": "echo \"No tests specified\" && exit 0",
+    "lint": "echo \"No linting configured\" && exit 0"
   },
   "dependencies": {
     "cors": "^2.8.5",

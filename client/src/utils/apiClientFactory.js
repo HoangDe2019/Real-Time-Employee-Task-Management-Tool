@@ -90,7 +90,8 @@ class HttpApiClient {
 
 export const ApiClientFactory = {
   create() {
-    const baseURL ='http://localhost:8888';
+    // Use environment variable for API base URL, fallback to localhost for development
+    const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000';
     console.log('[ApiClientFactory] create with baseURL:', baseURL);
     return new HttpApiClient(baseURL);
   }

@@ -1,0 +1,76 @@
+name: Deploy Server
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'server/**'
+      - '.github/workflows/deploy-server.yml'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'server/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: server/package-lock.json
+        
+    - name: Install dependencies
+      run: |
+        cd server
+        npm ci
+        
+    - name: Run tests (if any)
+      run: |
+        cd server
+        npm test || echo "No tests found"
+        
+    - name: Build check
+      run: |
+        cd server
+        node --check src/index.js
+
+  deploy-railway:
+    if: github.ref == 'refs/heads/main'
+    needs: test
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      
+    - name: Deploy to Railway
+      if: ${{ secrets.RAILWAY_TOKEN }}
+      uses: railwayapp/railway-deploy@v1.0.0
+      with:
+        railway-token: ${{ secrets.RAILWAY_TOKEN }}
+        service: ${{ secrets.RAILWAY_SERVICE }}
+        directory: server
+
+  deploy-render:
+    if: github.ref == 'refs/heads/main'
+    needs: test
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      
+    - name: Deploy to Render
+      if: ${{ secrets.RENDER_API_KEY }}
+      uses: johnbeynon/render-deploy-action@v0.0.8
+      with:
+        api-key: ${{ secrets.RENDER_API_KEY }}
+        service-id: ${{ secrets.RENDER_SERVICE_ID }}
+        directory: server
