@@ -90,7 +90,7 @@ class HttpApiClient {
 
 export const ApiClientFactory = {
   create() {
-    const baseURL ='http://localhost:8888';
+    const baseURL ='http://113.173.154.153:8888';
     console.log('[ApiClientFactory] create with baseURL:', baseURL);
     return new HttpApiClient(baseURL);
   }
